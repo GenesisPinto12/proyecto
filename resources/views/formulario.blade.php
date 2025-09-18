@@ -1,6 +1,5 @@
 <x-app-layout>
-    <x-slot name="header">
-    </x-slot>
+
 
 <div class="container">
     <div class="row justify-content-center">
@@ -61,7 +60,23 @@
                             @enderror
                         </div>
                         
-                        <button type="submit" class="btn btn-primary">{{ __('Guardar Cliente') }}</button>
+
+
+
+                        <div class="mb-3">
+                            <x-input-label for="monto" class="form-label">{{ __('Monto Poliza en $') }}</x-input-label>
+                            <input type="text" class="form-control @error('monto') is-invalid @enderror" id="monto" name="monto" value="{{ old('monto') }}" required>
+                            @error('monto')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+
+
+
+                        <button type="submit" class="btn btn-primary text-sm text-gray-600 dark:text-gray-400">{{ __('Guardar Cliente') }}</button>
                     </form>
                 </div>
             </div>

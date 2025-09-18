@@ -27,6 +27,8 @@ class ClienteController extends Controller
             'apellidos' => 'required|string|max:255',
             'cedula' => 'required|string|max:20|unique:clientes,cedula',
             'duracion' => 'required|integer|min:1',
+            'monto' => 'required|string|max:6',
+
         ]);
 
         // Generar número de póliza aleatorio
@@ -41,6 +43,8 @@ class ClienteController extends Controller
             'cedula' => $request->cedula,
             'numero_poliza' => $numero_poliza, 
             'duracion' => $request->duracion,
+            'monto' => $request->monto,
+
         ]);
 
         return redirect()->route('clientes.index')->with('success', 'Cliente registrado correctamente.');
