@@ -1,42 +1,71 @@
-@extends('layouts.app')
+<x-app-layout>
+    <x-slot name="header">
+    </x-slot>
 
-@section('content')
-<div class="container py-4">
-    <h1>Registrar Cliente</h1>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card"> 
+                <br>
+                
+                <body>
+                <h2 class="card-header">{{ __('Registrar Cliente y Póliza') }}</h2>
+                </body>
 
-    @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
+                <div class="card-body">
+                    @if (session('success'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('success') }}
+                        </div>
+                    @endif
 
-    <form action="{{ route('clientes.store') }}" method="POST">
-        @csrf
+                    <form action="{{ route('clientes.store') }}" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="nombres" class="form-label">{{ __('Nombres') }}</label>
+                            <input type="text" class="form-control @error('nombres') is-invalid @enderror" id="nombres" name="nombres" value="{{ old('nombres') }}" required>
+                            @error('nombres')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
 
-        <div class="mb-3">
-            <label for="nombres" class="form-label">Nombres</label>
-            <input type="text" name="nombres" id="nombres" class="form-control @error('nombres') is-invalid @enderror" value="{{ old('nombres') }}" required>
-            @error('nombres')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                        <div class="mb-3">
+                            <label for="apellidos" class="form-label">{{ __('Apellidos') }}</label>
+                            <input type="text" class="form-control @error('apellidos') is-invalid @enderror" id="apellidos" name="apellidos" value="{{ old('apellidos') }}" required>
+                            @error('apellidos')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="cedula" class="form-label">{{ __('Cédula de Identidad') }}</label>
+                            <input type="text" class="form-control @error('cedula') is-invalid @enderror" id="cedula" name="cedula" value="{{ old('cedula') }}" required>
+                            @error('cedula')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="duracion" class="form-label">{{ __('Duración de la póliza (meses)') }}</label>
+                            <input type="number" class="form-control @error('duracion') is-invalid @enderror" id="duracion" name="duracion" value="{{ old('duracion') }}" min="1" required>
+                            @error('duracion')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">{{ __('Guardar Cliente') }}</button>
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <div class="mb-3">
-            <label for="apellidos" class="form-label">Apellidos</label>
-            <input type="text" name="apellidos" id="apellidos" class="form-control @error('apellidos') is-invalid @enderror" value="{{ old('apellidos') }}" required>
-            @error('apellidos')<div class="invalid-feedback">{{ $message }}</div>@enderror
-        </div>
-
-        <div class="mb-3">
-            <label for="cedula" class="form-label">Cédula de Identidad</label>
-            <input type="text" name="cedula" id="cedula" class="form-control @error('cedula') is-invalid @enderror" value="{{ old('cedula') }}" required>
-            @error('cedula')<div class="invalid-feedback">{{ $message }}</div>@enderror
-        </div>
-
-        <div class="mb-3">
-            <label for="duracion" class="form-label">Duración de la póliza (meses)</label>
-            <input type="number" name="duracion" id="duracion" class="form-control @error('duracion') is-invalid @enderror" value="{{ old('duracion') }}" min="1" required>
-            @error('duracion')<div class="invalid-feedback">{{ $message }}</div>@enderror
-        </div>
-
-        <button type="submit" class="btn btn-primary">Registrar Cliente</button>
-    </form>
+    </div>
 </div>
-@endsection
-
+</x-app-layout>

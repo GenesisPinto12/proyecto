@@ -26,4 +26,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/formulario', [ClienteController::class, 'create'])->name('clientes.create');
     Route::post('/dashboard/formulario', [ClienteController::class, 'store'])->name('clientes.store');
     Route::get('/dashboard/consultar', [ClienteController::class, 'index'])->name('clientes.index');
+    Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes.index');
+    Route::get('/clientes/create', [ClienteController::class, 'create'])->name('clientes.create');
+    Route::post('/clientes', [ClienteController::class, 'store'])->name('clientes.store');
 });
