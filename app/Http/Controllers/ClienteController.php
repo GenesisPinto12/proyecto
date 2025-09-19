@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Cliente;
 use Illuminate\Support\Str; 
@@ -30,8 +29,6 @@ class ClienteController extends Controller
             'monto' => 'required|string|max:6',
 
         ]);
-
-        // Generar número de póliza aleatorio
         
         do {
             $numero_poliza = strtoupper(Str::random(8));

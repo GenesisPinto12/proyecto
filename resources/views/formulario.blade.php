@@ -13,7 +13,10 @@
                     </h2>
                 </body>
 
-
+<div class="card p-4 shadow-sm border rounded">
+    <form method="POST" action="{{ route('register') }}">
+        @csrf
+    </form>
                 
                 <div class="card-body">
                     @if (session('success'))
@@ -82,6 +85,8 @@
 
 
                         <button type="submit" class="btn btn-primary text-sm text-gray-600 dark:text-gray-400">{{ __('Guardar Cliente') }}</button>
+                    </div>
+
                     </form>
                 </div>
             </div>

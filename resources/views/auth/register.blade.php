@@ -1,5 +1,4 @@
 <x-guest-layout>
-       <x-slot name="header">
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
@@ -43,6 +42,4 @@
                 {{ __('Registrar') }}
             </x-primary-button>
         </div>
-
-    </x-slot>
 </x-guest-layout>
