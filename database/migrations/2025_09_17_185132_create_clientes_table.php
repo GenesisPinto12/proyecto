@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('cedula')->unique();
             $table->string('numero_poliza')->unique(); 
             $table->integer('duracion'); 
-            //$table->integer('monto'); 
             $table->timestamps();
         });
     }
