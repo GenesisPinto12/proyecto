@@ -23,6 +23,7 @@
                 <th>{{ __('Cédula') }}</th>
                 <th>{{ __('Número de Póliza') }}</th>
                 <th>{{ __('Duración (meses)') }}</th>
+                <th>{{ __('status') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -33,6 +34,7 @@
                     <td>{{ $cliente->cedula }}</td>
                     <td>{{ $cliente->numero_poliza }}</td>
                     <td>{{ $cliente->duracion }}</td>
+                    <td>{{ $cliente->status }}</td>
                 </tr>
             @endforeach
         </tbody>

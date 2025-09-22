@@ -25,7 +25,7 @@
                     </div>
 
                         <div class="mb-3">
-                        <x-input-label for="date" class="form-label">{{ __('Fecha y hora') }}</x-input-label>}
+                        <x-input-label for="date" class="form-label">{{ __('Fecha y hora') }}</x-input-label>
                         <input type="text" class="form-control @error('date') is-invalid @enderror" id="date" name="date" value="{{ old('date', $cliente->created_at) }}" required>
                         @error('date')
                             <span class="invalid-feedback" role="alert"></span>

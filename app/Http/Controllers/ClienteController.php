@@ -47,7 +47,7 @@ class ClienteController extends Controller
             'duracion' => $request->duracion,
             'status' => $request->status ?? 'active',
         ]);
-        return redirect()->route('clientes.index')->with('success', 'Cliente registrado correctamente.');
+        return redirect()->route('formulario')->with('success', 'Cliente registrado correctamente.');
     }
 
 
@@ -92,8 +92,6 @@ class ClienteController extends Controller
         ]);
 
         return redirect()->route('clientes.index')->with('success', 'Cliente actualizado correctamente.');
-
-
     }
 
 
