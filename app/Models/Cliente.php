@@ -10,7 +10,9 @@ class Cliente extends Model
         'nombres',
         'apellidos',
         'cedula',
-        'numero_poliza', 
-        'duracion',      
+        'numero_poliza',
+        'duracion',
     ];
+
+
 }

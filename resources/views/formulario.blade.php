@@ -1,12 +1,10 @@
 <x-app-layout>
 
-
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card"> 
+            <div class="card">
                 <br>
-                
                 <body>
                     <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
                         {{ __('Listado de Clientes y Pólizas') }}
@@ -17,7 +15,7 @@
     <form method="POST" action="{{ route('register') }}">
         @csrf
     </form>
-                
+
                 <div class="card-body">
                     @if (session('success'))
                         <div class="alert alert-success" role="alert">
@@ -67,24 +65,9 @@
                                 </span>
                             @enderror
                         </div>
-                        
-
-
-
-                        <div class="mb-3">
-                            <x-input-label for="monto" class="form-label">{{ __('Monto Poliza en $') }}</x-input-label>
-                            <input type="number" class="form-control @error('monto') is-invalid @enderror" id="monto" name="monto" value="{{ old('monto') }}" required>
-                            @error('monto')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-
-
 
                         <button type="submit" class="btn btn-primary text-sm text-gray-600 dark:text-gray-400">{{ __('Guardar Cliente') }}</button>
+
                     </div>
 
                     </form>

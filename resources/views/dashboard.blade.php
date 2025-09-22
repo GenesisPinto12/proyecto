@@ -16,8 +16,6 @@
         </div>
     </div>
 
-    <div class="box">
-        
 
-    </div>
+
 </x-app-layout>

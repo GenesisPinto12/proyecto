@@ -1,19 +1,15 @@
 <x-app-layout>
-
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            
+
             <body>
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
             {{ __('Listado de Clientes y Pólizas') }}
             </h2>
-            </body>
-
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">{{ __('Clientes Registrados') }}</h3>
-                    
+
                     @if($clientes->isEmpty())
                         <p>{{ __('No hay clientes registrados aún.') }}</p>
                     @else
@@ -35,6 +31,9 @@
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                             {{ __('Duración (meses)') }}
+                                        </th>
+                                        <th>
+
                                         </th>
 
                                     </tr>
@@ -58,10 +57,13 @@
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
                                                 {{ $cliente->duracion }}
                                             </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                                <a href="{{ route('clientes.edit', $cliente->id) }}" class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-200">{{ __('Editar') }}</a>
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                
+
+
                             </table>
                         </div>
                     @endif
