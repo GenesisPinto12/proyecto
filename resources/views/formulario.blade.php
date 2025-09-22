@@ -25,7 +25,6 @@
 
                     <form action="{{ route('clientes.store') }}" method="POST">
 
-                        @csrf
                         <div class="mb-3">
                             <x-input-label for="nombres" class="form-label">{{ __('Nombres') }}</x-input-label>
                             <input type="text" class="form-control @error('nombres') is-invalid @enderror" id="nombres" name="nombres" value="{{ old('nombres') }}" required>

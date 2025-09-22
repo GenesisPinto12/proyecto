@@ -32,9 +32,6 @@
                                         <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                             {{ __('Duración (meses)') }}
                                         </th>
-                                        <th>
-
-                                        </th>
 
                                     </tr>
                                 </thead>
@@ -59,7 +56,20 @@
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                                 <a href="{{ route('clientes.edit', $cliente->id) }}" class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-200">{{ __('Editar') }}</a>
-                                        </tr>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                                <form action="{{ route('clientes.destroy', $cliente->id) }}" method="POST" onsubmit="return confirm('{{ __('¿Estás seguro de que deseas eliminar este cliente?') }}');">
+
+
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-200">{{ __('Eliminar') }}</button>
+                                                </form>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                                <a href="{{ route('clientes.show', $cliente->id) }}" class="text-green-600 hover:text-green-900 dark:text-green-400 dark:hover:text-green-200">{{ __('Ver') }}</a>
+                                            </td>
+
                                     @endforeach
                                 </tbody>
 

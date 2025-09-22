@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/edit', [ClienteController::class, 'update'])->name('clientes.update');
     Route::delete('/delete', [ClienteController::class, 'destroy'])->name('clientes.destroy');
     Route::get('/formulario', [ClienteController::class, 'create'])->name('clientes.create');
+    Route::resource('clientes', ClienteController::class);
 });
 require __DIR__.'/auth.php';
 

@@ -14,8 +14,9 @@ return new class extends Migration
             $table->string('nombres');
             $table->string('apellidos');
             $table->string('cedula')->unique();
-            $table->string('numero_poliza')->unique(); 
-            $table->integer('duracion'); 
+            $table->string('numero_poliza')->unique();
+            $table->integer('duracion');
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });
     }

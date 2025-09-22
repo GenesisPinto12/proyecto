@@ -11,8 +11,7 @@
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 text-gray-900 dark:text-gray-100">
                 <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">{{ __('Editar Cliente') }}</h3>
-                <form method="POST" action="()">
-
+                <form method="POST" action="{{ route('register') }}">
 
                     @csrf
                     @method('PUT')
@@ -45,7 +44,6 @@
                                 <strong>{{ $message }}</strong>
                             @enderror
                         </div>
-
 
                     <div class="mb-3">
                         <x-input-label for="duracion" class="form-label">{{ __('Duración (meses)') }}</x-input-label>

@@ -31,7 +31,8 @@ class ClienteController extends Controller
             'apellidos' => 'required|string|max:255',
             'cedula' => 'required|string|max:20|unique:clientes,cedula',
             'duracion' => 'required|integer|min:1',
-        ]);
+            'status' => ['nullable', Rule::in(['active ', 'inactive'])],
+            ]);
 
         do {
             $numero_poliza = strtoupper(Str::random(8));
@@ -44,6 +45,7 @@ class ClienteController extends Controller
             'cedula' => $request->cedula,
             'numero_poliza' => $numero_poliza,
             'duracion' => $request->duracion,
+            'status' => $request->status ?? 'active',
         ]);
         return redirect()->route('clientes.index')->with('success', 'Cliente registrado correctamente.');
     }
@@ -71,7 +73,6 @@ class ClienteController extends Controller
 
 
 //Actualizar informacion del cliente
-
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -97,9 +98,9 @@ class ClienteController extends Controller
 
 
 //Eliminar informacion del cliente
-
     public function destroy($id)
     {
+        $id = Auth::id();
         $cliente = Cliente::findOrFail($id);
         $cliente->delete();
         return redirect()->route('clientes.index')->with('success', 'Cliente eliminado correctamente.');
