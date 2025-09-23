@@ -2,7 +2,7 @@
 
 <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
-        {{ __('Informaciom') }}
+        {{ __('Informacióm') }}
     </h2>
     </x-slot>
 
@@ -30,6 +30,8 @@
                         @error('date')
                             <span class="invalid-feedback" role="alert"></span>
                                 <strong>{{ $message }}</strong>
+                        @enderror
+
 
                     @csrf
                     @method('PUT')
@@ -52,6 +54,7 @@
                             </span>
                         @enderror
                     </div>
+
                     <div>
                         <x-input-label for="cedula" class="form-label">{{ __('Cédula') }}</x-input-label>
                         <input type="text" class="form-control @error('cedula') is-invalid @enderror" id="cedula" name="cedula" value="{{ old('cedula', $clientes->cedula) }}" required>
@@ -59,6 +62,29 @@
                             <span class="invalid-feedback" role="alert"></span>
                                 <strong>{{ $message }}</strong>
                         @enderror
+
+                        <div>
+                            x-input-label for="duracion" class="form-label">{{ __('Duración (años)') }}</x-input-label>
+                            <input type="number" class="form-control @error('duracion') is-invalid @enderror" id="duracion" name="duracion" value="{{ old('duracion', $clientes->duracion) }}" required min="1">
+                            @error('duracion')
+                                <span class="invalid-feedback" role="alert"></span>
+                                    <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
+
+                        <div>
+                            <x-input-label for="status" class="form-label">{{ __('Estado') }}</x-input-label>
+                            <select id="status" name="status" class="form-control @error('status') is-invalid @enderror">
+                                <option value="active" {{ old('status', $clientes->status) == 'active' ? 'selected' : '' }}>Activo</option>
+                                <option value="inactive" {{ old('status', $clientes->status) == 'inactive' ?'selected' : '' }}>Inactivo</option>
+                            </select>
+                            @error('status')
+                                <span class="invalid-feedback" role="alert"></span>
+                                    <strong>{{ $message }}</strong>
+                            @enderror
+                        </div>
+
+                        <button type="submit" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">{{ __('Actualizar Cliente') }}</button>
 
                     </div>
                 </form>
