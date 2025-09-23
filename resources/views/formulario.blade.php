@@ -1,78 +1,66 @@
-<x-app-layout>
+<!-- ... tu código HTML existente ... -->
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <br>
-                <body>
-                    <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
-                        {{ __('Listado de Clientes y Pólizas') }}
-                    </h2>
-                </body>
-
-<div class="card p-4 shadow-sm border rounded">
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
-    </form>
-
-                <div class="card-body">
-                    @if (session('success'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-
-                    <form action="{{ route('clientes.store') }}" method="POST">
-
-                        <div class="mb-3">
-                            <x-input-label for="nombres" class="form-label">{{ __('Nombres') }}</x-input-label>
-                            <input type="text" class="form-control @error('nombres') is-invalid @enderror" id="nombres" name="nombres" value="{{ old('nombres') }}" required>
-                            @error('nombres')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3">
-                            <x-input-label for="apellidos" class="form-label">{{ __('Apellidos') }}</x-input-label>
-                            <input type="text" class="form-control @error('apellidos') is-invalid @enderror" id="apellidos" name="apellidos" value="{{ old('apellidos') }}" required>
-                            @error('apellidos')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3">
-                            <x-input-label for="cedula" class="form-label">{{ __('Cédula de Identidad') }}</x-input-label>
-                            <input type="text" class="form-control @error('cedula') is-invalid @enderror" id="cedula" name="cedula" value="{{ old('cedula') }}" required>
-                            @error('cedula')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3">
-                            <x-input-label for="duracion" class="form-label">{{ __('Duración de la póliza (meses)') }}</x-input-label>
-                            <input type="number" class="form-control @error('duracion') is-invalid @enderror" id="duracion" name="duracion" value="{{ old('duracion') }}" min="1" required>
-                            @error('duracion')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <button type="submit" class="btn btn-primary text-sm text-gray-600 dark:text-gray-400">{{ __('Guardar Cliente') }}</button>
-
-                    </div>
-
-                    </form>
-                </div>
-            </div>
-        </div>
+@if (session('success'))
+    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+        <span class="block sm:inline">{{ session('success') }}</span>
     </div>
-</div>
-</x-app-layout>
+@endif
+
+@if ($errors->any())
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+<form method="POST" action="{{ route('clientes.store') }}">
+    @csrf {{-- ¡Importante para la seguridad! --}}
+
+    <div>
+        <label for="nombres">Nombres:</label>
+        <input type="text" id="nombres" name="nombres" value="{{ old('nombres') }}" required>
+        @error('nombres')
+            <p class="text-red-500 text-xs italic">{{ $message }}</p>
+        @enderror
+    </div>
+
+    <div>
+        <label for="apellidos">Apellidos:</label>
+        <input type="text" id="apellidos" name="apellidos" value="{{ old('apellidos') }}" required>
+        @error('apellidos')
+            <p class="text-red-500 text-xs italic">{{ $message }}</p>
+        @enderror
+    </div>
+
+    <div>
+        <label for="cedula">Cédula:</label>
+        <input type="text" id="cedula" name="cedula" value="{{ old('cedula') }}" required>
+        @error('cedula')
+            <p class="text-red-500 text-xs italic">{{ $message }}</p>
+        @enderror
+    </div>
+
+    <div>
+        <label for="duracion">Duración (años):</label>
+        <input type="number" id="duracion" name="duracion" value="{{ old('duracion') }}" required min="1">
+        @error('duracion')
+            <p class="text-red-500 text-xs italic">{{ $message }}</p>
+        @enderror
+    </div>
+
+    <div>
+        <label for="status">Estado:</label>
+        <select id="status" name="status">
+            <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Activo</option>
+            <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>Inactivo</option>
+        </select>
+        @error('status')
+            <p class="text-red-500 text-xs italic">{{ $message }}</p>
+        @enderror
+    </div>
+
+    <button type="submit">Registrar Cliente</button>
+</form>

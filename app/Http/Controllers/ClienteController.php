@@ -1,45 +1,36 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
+
+use App\Http\Requests\ClienteStoreRequest;
+use App\Http\Requests\ClienteUpdateRequest;
 use App\Models\Cliente;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class ClienteController extends Controller
 {
-
-    public function index()
+    public function index(): View
     {
         $clientes = Cliente::all();
+
         return view('consultar', compact('clientes'));
     }
 
-
-    public function create()
+    public function create(): View
     {
         return view('formulario');
     }
 
-
-    public function store(Request $request)
+    public function store(ClienteStoreRequest $request): RedirectResponse
     {
-        $request->validate([
-            'id' => 'sometimes|exists:clientes,id',
-            'nombres' => 'required|string|max:255',
-            'apellidos' => 'required|string|max:255',
-            'cedula' => 'required|string|max:20|unique:clientes,cedula',
-            'duracion' => 'required|integer|min:1',
-            'status' => ['nullable', Rule::in(['active ', 'inactive'])],
-            ]);
 
         do {
             $numero_poliza = strtoupper(Str::random(8));
         } while (Cliente::where('numero_poliza', $numero_poliza)->exists());
 
         Cliente::create([
-            'id' => $request->id,
             'nombres' => $request->nombres,
             'apellidos' => $request->apellidos,
             'cedula' => $request->cedula,
@@ -47,61 +38,38 @@ class ClienteController extends Controller
             'duracion' => $request->duracion,
             'status' => $request->status ?? 'active',
         ]);
-        return redirect()->route('formulario')->with('success', 'Cliente registrado correctamente.');
+
+        return redirect()->route('clientes.create')->with('success', 'Cliente registrado correctamente.');
     }
 
-
-    public function show($id)
+    public function show(Cliente $cliente): View
     {
-        $id = Auth::id();
-        $cliente = Cliente::findOrFail($id);
-        return view('show', compact('clientes'));
-
+        return view('show', compact('cliente'));
     }
 
-
-//Editar informacion del cliente
-    public function edit($id)
+    public function edit(Cliente $cliente): View
     {
-        $id = Auth::id();
-        $cliente = Cliente::findOrFail($id);
-        $clientes = Cliente::all();
-        Cliente::findOrFail($id);
-        return view('edit', compact('clientes'));
-
+        return view('edit', compact('cliente'));
     }
 
-
-//Actualizar informacion del cliente
-    public function update(Request $request, $id)
+    public function update(ClienteUpdateRequest $request, Cliente $cliente): RedirectResponse
     {
-        $request->validate([
 
-            'nombres' => 'required|string|max:255',
-            'apellidos' => 'required|string|max:255',
-            'cedula' => 'required|string|max:20|unique:clientes,cedula,'.$id,
-            'duracion' => 'required|integer|min:1',
-        ]);
-
-        $cliente = Cliente::findOrFail($id);
         $cliente->update([
             'nombres' => $request->nombres,
             'apellidos' => $request->apellidos,
             'cedula' => $request->cedula,
             'duracion' => $request->duracion,
+            'status' => $request->status ?? $cliente->status,
         ]);
 
         return redirect()->route('clientes.index')->with('success', 'Cliente actualizado correctamente.');
     }
 
-
-//Eliminar informacion del cliente
-    public function destroy($id)
+    public function destroy(Cliente $cliente): RedirectResponse
     {
-        $id = Auth::id();
-        $cliente = Cliente::findOrFail($id);
         $cliente->delete();
-        return redirect()->route('clientes.index')->with('success', 'Cliente eliminado correctamente.');
 
+        return redirect()->route('clientes.index')->with('success', 'Cliente eliminado correctamente.');
     }
 }
