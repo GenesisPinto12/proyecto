@@ -49,7 +49,7 @@
     </div>
 
     <div>
-        <label for="duracion">Duración (años):</label>
+        <label for="duracion">Duración (Meses):</label>
         <input type="number" id="duracion" name="duracion" value="{{ old('duracion', $cliente->duracion) }}" required min="1">
         @error('duracion')
             <p class="px-6 py-3 text-start text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{{ $message }}</p>

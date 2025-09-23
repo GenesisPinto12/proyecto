@@ -22,7 +22,7 @@ class ClienteUpdateRequest extends FormRequest
             'apellidos' => ['required', 'string', 'max:255'],
             'cedula' => ['required', 'string', 'max:20', Rule::unique(Cliente::class)->ignore($this->route('cliente'))],
             'duracion' => ['required', 'integer', 'min:1'],
-            'status' => ['nullable', Rule::in(['active', 'inactive'])], // Añadir status para actualización si es necesario
+            'status' => ['nullable', Rule::in(['active', 'inactive'])],
         ];
     }
 

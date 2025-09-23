@@ -23,6 +23,7 @@ class ClienteController extends Controller
         return view('formulario');
     }
 
+
     public function store(ClienteStoreRequest $request): RedirectResponse
     {
 
@@ -45,6 +46,7 @@ class ClienteController extends Controller
     public function show(Cliente $cliente): View
     {
         return view('show', compact('cliente'));
+
     }
 
     public function edit(Cliente $cliente): View

@@ -14,9 +14,10 @@
                 <form method="patch" action="()">
 
 
+
                     <div class="mb-3">
                         <x-input-label for="name" class="form-label">{{ __('Datos de la persona que ingreso la información') }}</x-input-label>
-                        <input type="text" class="form-control @error('nombres') is-invalid @enderror" id="name" name="name" value="{{ old('name', $user->name) }}" required>
+                        <input type="text" class="form-control @error('nombres') is-invalid @enderror" id="name" name="name" value="{{ old('name', $users->name) }}" required>
                         @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -31,6 +32,7 @@
                             <span class="invalid-feedback" role="alert"></span>
                                 <strong>{{ $message }}</strong>
                         @enderror
+
 
 
                     @csrf
@@ -64,7 +66,7 @@
                         @enderror
 
                         <div>
-                            x-input-label for="duracion" class="form-label">{{ __('Duración (años)') }}</x-input-label>
+                            <x-input-label for="duracion" class="form-label">{{ __('Duración (meses)') }}</x-input-label>
                             <input type="number" class="form-control @error('duracion') is-invalid @enderror" id="duracion" name="duracion" value="{{ old('duracion', $clientes->duracion) }}" required min="1">
                             @error('duracion')
                                 <span class="invalid-feedback" role="alert"></span>
@@ -84,9 +86,9 @@
                             @enderror
                         </div>
 
-                        <button type="submit" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">{{ __('Actualizar Cliente') }}</button>
 
                     </div>
+                    <button type="submit" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">{{ __('Actualizar Cliente') }}</button>
                 </form>
             </div>
         </div>
