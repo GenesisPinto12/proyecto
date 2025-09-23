@@ -11,7 +11,7 @@
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 text-gray-900 dark:text-gray-100">
                 <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">{{ __('Editar Cliente') }}</h3>
-                <form method="POST" action="()">
+                <form method="patch" action="()">
 
 
                     <div class="mb-3">
@@ -35,7 +35,7 @@
                     @method('PUT')
                     <div class="mb-3">
                         <x-input-label for="nombres" class="form-label">{{ __('Nombres') }}</x-input-label>
-                        <input type="text" class="form-control @error('nombres') is-invalid @enderror" id="nombres" name="nombres" value="{{ old('nombres', $clientes->nombres) }}" required>
+                        <input type="text" class="form-control @error('nombres') is-invalid @enderror" id="name" name="name" value="{{ old('name', $clientes->nombres) }}" required>
                         @error('nombres')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -51,11 +51,16 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
+                    </div>
+                    <div>
+                        <x-input-label for="cedula" class="form-label">{{ __('Cédula') }}</x-input-label>
+                        <input type="text" class="form-control @error('cedula') is-invalid @enderror" id="cedula" name="cedula" value="{{ old('cedula', $clientes->cedula) }}" required>
+                        @error('cedula')
+                            <span class="invalid-feedback" role="alert"></span>
+                                <strong>{{ $message }}</strong>
+                        @enderror
 
-
-
-
-
+                    </div>
                 </form>
             </div>
         </div>

@@ -3,9 +3,11 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             <body>
+
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">
             {{ __('Listado de Clientes y Pólizas') }}
             </h2>
+
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">{{ __('Clientes Registrados') }}</h3>
@@ -30,7 +32,7 @@
                                             {{ __('Número de Póliza') }}
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                                            {{ __('Duración (meses)') }}
+                                            {{ __('Duración (Años)') }}
                                         </th>
 
                                     </tr>
@@ -79,6 +81,7 @@
                     @endif
                 </div>
             </div>
+        </body>
         </div>
     </div>
 </x-app-layout>
